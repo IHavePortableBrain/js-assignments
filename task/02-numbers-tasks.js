@@ -56,9 +56,7 @@ function getCicleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-    var min = Math.min(value1, value2),
-        max = Math.max(value1, value2);
-    return min + (max - min) / 2;
+    return (BigInt(value1) + BigInt(value2)) / BigInt(2);
     //throw new Error('Not implemented');
 }
 
@@ -95,7 +93,8 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  *   5*x = 0         => 0
  */
 function getLinearEquationRoot(a, b) {
-    throw new Error('Not implemented');
+    return (-b/a)
+    //throw new Error('Not implemented');
 }
 
 
@@ -117,7 +116,8 @@ function getLinearEquationRoot(a, b) {
  *   (0,1) (1,2)     => 0
  */
 function getAngleBetweenVectors(x1, y1, x2, y2) {
-    throw new Error('Not implemented');
+    return Math.acos((x1*x2+y1*y2)/Math.hypot(x1,y1)/Math.hypot(x2,y2));
+    //throw new Error('Not implemented');
 }
 
 /**
@@ -133,7 +133,14 @@ function getAngleBetweenVectors(x1, y1, x2, y2) {
  *     0     => 0
  */
 function getLastDigit(value) {
-    throw new Error('Not implemented');
+    let dim, res;
+    dim = Math.trunc(Math.log10(value));
+    res = value;
+    while (dim > 0){
+        res =  res % Math.pow(10, dim--);
+    }
+    return res;
+    //throw new Error('Not implemented');
 }
 
 
@@ -149,7 +156,8 @@ function getLastDigit(value) {
  * '-525.5'     => -525.5
  */
 function parseNumberFromString(value) {
-    throw new Error('Not implemented');
+    return (Number.parseFloat(value));
+    //throw new Error('Not implemented');
 }
 
 /**
@@ -166,7 +174,8 @@ function parseNumberFromString(value) {
  *   1,2,3   => 3.741657386773941
  */
 function getParallelipidedDiagonal(a,b,c) {
-    throw new Error('Not implemented');
+    return Math.hypot(a,b,c);
+    //throw new Error('Not implemented');
 }
 
 /**
@@ -187,7 +196,9 @@ function getParallelipidedDiagonal(a,b,c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-    throw new Error('Not implemented');
+    const pow10Res = Math.pow(10,pow);
+    return Math.round(num/pow10Res) * pow10Res;
+    //throw new Error('Not implemented');
 }
 
 /**
@@ -208,6 +219,13 @@ function roundToPowerOfTen(num, pow) {
  *   17 => true
  */
 function isPrime(n) {
+    let i;
+    for (i = 2; i <= Math.round(Math.sqrt(n));i++)
+    {
+        if (n%i === 0)
+            return false;
+    }
+    return true;
     throw new Error('Not implemented');
 }
 
@@ -227,7 +245,9 @@ function isPrime(n) {
  *   toNumber(new Number(42), 0) => 42
  */
 function toNumber(value, def) {
-    throw new Error('Not implemented');
+    let res = parseFloat(String(value));
+    return isNaN(res)? def : res;
+    //throw new Error('Not implemented');
 }
 
 module.exports = {
